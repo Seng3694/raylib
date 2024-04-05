@@ -4157,8 +4157,8 @@ void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2
         // Only calculate rotation if needed
         if (rotation == 0.0f)
         {
-            float x = dest.x - origin.x;
-            float y = dest.y - origin.y;
+            float x = dest.x;
+            float y = dest.y;
             topLeft = (Vector2){ x, y };
             topRight = (Vector2){ x + dest.width, y };
             bottomLeft = (Vector2){ x, y + dest.height };
@@ -4173,17 +4173,17 @@ void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2
             float dx = -origin.x;
             float dy = -origin.y;
 
-            topLeft.x = x + dx*cosRotation - dy*sinRotation;
-            topLeft.y = y + dx*sinRotation + dy*cosRotation;
+            topLeft.x = x + dx*cosRotation - dy*sinRotation + origin.x;
+            topLeft.y = y + dx*sinRotation + dy*cosRotation + origin.y;
 
-            topRight.x = x + (dx + dest.width)*cosRotation - dy*sinRotation;
-            topRight.y = y + (dx + dest.width)*sinRotation + dy*cosRotation;
+            topRight.x = x + (dx + dest.width)*cosRotation - dy*sinRotation + origin.x;
+            topRight.y = y + (dx + dest.width)*sinRotation + dy*cosRotation + origin.y;
 
-            bottomLeft.x = x + dx*cosRotation - (dy + dest.height)*sinRotation;
-            bottomLeft.y = y + dx*sinRotation + (dy + dest.height)*cosRotation;
+            bottomLeft.x = x + dx*cosRotation - (dy + dest.height)*sinRotation + origin.x;
+            bottomLeft.y = y + dx*sinRotation + (dy + dest.height)*cosRotation + origin.y;
 
-            bottomRight.x = x + (dx + dest.width)*cosRotation - (dy + dest.height)*sinRotation;
-            bottomRight.y = y + (dx + dest.width)*sinRotation + (dy + dest.height)*cosRotation;
+            bottomRight.x = x + (dx + dest.width)*cosRotation - (dy + dest.height)*sinRotation + origin.x;
+            bottomRight.y = y + (dx + dest.width)*sinRotation + (dy + dest.height)*cosRotation + origin.y;
         }
 
         rlSetTexture(texture.id);
